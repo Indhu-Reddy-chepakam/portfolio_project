@@ -1,0 +1,791 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home | Indhu Reddy{% endblock %}
+
+{% block content %}
+
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ================= BODY ================= */
+body{
+    background:black;
+    color:white;
+    overflow-x:hidden;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* LIGHT MODE */
+body.light-mode{
+    background:#f9f9f9;
+    color:#111;
+}
+
+/* ================= NAVBAR ================= */
+
+
+
+/* Left profile */
+.profile{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background: linear-gradient(135deg,#5f6cff,#7f9cff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    color:white;
+    font-size:16px;
+    box-shadow: 0 0 12px rgba(120,150,255,0.6);
+    transition: background 0.3s, color 0.3s;
+}
+
+body.light-mode .avatar{
+    background: #ccc;
+    color:#111;
+}
+
+.profile-text h3{
+    font-size:15px;
+    font-weight:600;
+}
+
+.profile-text p{
+    font-size:12px;
+    color:#4fa3ff;
+}
+
+body.light-mode .profile-text p {
+    color:#0077b6;
+}
+
+/* Center menu */
+.menu{
+    list-style:none;
+    display:flex;
+    justify-content:center;
+    gap:45px;
+}
+
+.menu li a{
+    text-decoration:none;
+    color:#ddd;
+    font-size:16px;
+    transition:0.3s;
+    position:relative;
+}
+
+.menu li a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0%;
+    height:2px;
+    background:#5f9cff;
+    transition:0.3s;
+}
+
+.menu li a:hover::after{ width:100%; }
+
+.menu li a:hover{
+    color:white;
+    text-shadow:0 0 10px rgba(255,255,255,0.4);
+}
+
+body.light-mode .menu li a{
+    color:#111;
+}
+
+body.light-mode .menu li a:hover{
+    color:#000;
+    text-shadow:none;
+}
+
+.spacer{ width:40px; }
+
+/* ================= LOADER ================= */
+#loader{
+    position:fixed;
+    width:100%;
+    height:100vh;
+    background:black;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+#loader h1{
+    font-size:55px;
+    letter-spacing:5px;
+    margin-bottom:40px;
+    text-shadow:0 0 15px white;
+    opacity:0;
+    transform:translateY(-30px);
+    animation: slideDown 0.8s forwards;
+}
+
+.loader-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+/* WHITE ICONS */
+.loader-icon{
+    font-size:30px;
+    color:white;
+    filter: grayscale(1);
+    text-shadow:0 0 12px white;
+}
+
+/* WHITE PROGRESS */
+.progress{
+    width:520px;
+    height:6px;
+    background:#1f1f1f;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    background:white;
+    transition: width 0.2s ease;
+}
+
+/* WHITE TEXT */
+.loading-text{
+    margin-top:18px;
+    font-size:15px;
+    color:white;
+    letter-spacing:1px;
+    opacity:0;
+    transform:translateY(-20px);
+    animation: slideDown 0.6s forwards;
+}
+
+@keyframes slideDown{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ================= CONTENT ================= */
+#content{
+    display:none;
+}
+
+/* ================= HERO ================= */
+.hero{
+    min-height:100vh;
+    background:#000;
+    color:#fff;
+    display:grid;
+    grid-template-columns: 1.2fr 1fr;
+    padding-left:100px;
+    padding-bottom:0px;
+    margin-top: -60px;
+    gap:50px;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.light-mode .hero{
+    background:#f9f9f9;
+    color:#111;
+}
+
+/* LEFT */
+.hero-left{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.intro{
+    font-size:48px;
+    font-weight:200;
+    margin-bottom:5px;
+}
+
+.name{
+    font-size:72px;
+    font-weight:500;
+    background:linear-gradient(90deg,#8a2cff,#3f5cff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin-bottom:5px;
+}
+
+
+.line{
+    width:130px;
+    height:3px;
+    background:#fff;
+    
+    transition: background 0.3s;
+}
+
+body.light-mode .line{
+    background:black;
+}
+
+.subtitle{
+    opacity: 0;           /* start hidden */
+    white-space: pre;     
+    font-size: 18px;
+    color: #7fffd4;
+    margin-bottom: 10px;
+    transition: opacity 0.3s;
+}
+
+body.light-mode .subtitle{
+    color:#0077b6;
+}
+
+.desc{
+    color:#4f8cff;
+    line-height:1.5;
+    max-width:650px;
+    margin-bottom:20px;
+    transition: color 0.3s;
+}
+
+body.light-mode .desc{
+    color:#111;
+}
+
+/* TAGS */
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:35px;
+}
+.tag:hover{
+    border:1px solid red;
+}
+.tag{
+    padding:10px 18px;
+    border-radius:25px;
+    border:1px solid #2f5cff;
+    background:rgba(20,20,40,0.5);
+    font-size:14px;
+    transition: all 0.3s;
+}
+
+body.light-mode .tag{
+    border:1px solid #0077b6;
+    background: #fff;
+    color:#111;
+}
+
+/* INFO CARDS */
+.info-cards{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+
+.card{
+    background:#111;
+    padding:16px 22px;
+    border-radius:12px;
+    min-width:200px;
+    transition: background 0.3s, color 0.3s, border 0.3s;
+}
+
+body.light-mode .card{
+    background:#eaeaea;
+    color:#111;
+    border:1px solid #ccc;
+}
+
+/* RIGHT HERO IMAGE */
+.hero-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, rgba(255,255,255,0.05), rgba(0,0,0,0.7));
+    border-radius: 30px;
+    padding: 20px;
+    margin-right: 50px;
+    transition: background 0.3s;
+}
+
+body.light-mode .hero-right {
+    background: radial-gradient(circle, rgba(0,0,0,0.03), rgba(0,0,0,0.1));
+}
+
+.image-wrap {
+    width: 100px;
+    height: 150px;
+    border-radius: 20px; 
+    background: radial-gradient(circle, rgba(244, 238, 238, 0.08), transparent 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-wrap img {
+    width: 250px;
+    height: auto;
+    filter: grayscale(100%);
+    border-radius: 10px;
+    box-shadow: 0 0px 3px rgba(0,0,0,0.22);
+
+  /* soft clean shadow */
+}
+
+
+/* ================= SIDEBAR ================= */
+.sidebar{
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 1000;
+}
+
+.sidebar button,
+.sidebar a{
+  background: #111;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, color 0.3s;
+  text-decoration: none;
+}
+
+.sidebar button:hover,
+.sidebar a:hover{
+  background: #333;
+  color: #fff;
+}
+
+body.light-mode .sidebar button,
+body.light-mode .sidebar a{
+  background: #fff;
+  color: #111;
+}
+
+body.light-mode .sidebar button:hover,
+body.light-mode .sidebar a:hover{
+  background: #e0e0e0;
+}
+
+/* ================= TOOLTIP ================= */
+.sidebar button[data-tooltip]:hover::before,
+.sidebar a[data-tooltip]:hover::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: black;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 13px;
+  z-index: 1001;
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.sidebar button[data-tooltip]::before,
+.sidebar a[data-tooltip]::before {
+  content: "";
+  opacity: 0;
+}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+    .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+        padding:120px 30px;
+    }
+}
+
+/* ================= HOME INTRO ANIMATIONS ================= */
+.hero-left > * ,
+.hero-right{
+    opacity: 0;
+}
+
+.from-right{
+    animation: fromRight 1s ease forwards;
+}
+
+.from-up{
+    animation: fromUp 1s ease forwards;
+}
+
+.from-down{
+    animation: fromDown 1s ease forwards;
+}
+
+@keyframes fromRight{
+    from{ transform: translateX(80px); opacity:0; }
+    to{ transform: translateX(0); opacity:1; }
+}
+
+@keyframes fromUp{
+    from{ transform: translateY(-60px); opacity:0; }
+    to{ transform: translateY(0); opacity:1; }
+}
+
+@keyframes fromDown{
+    from{ transform: translateY(60px); opacity:0; }
+    to{ transform: translateY(0); opacity:1; }
+}
+
+/* ================= CONNECT SECTION ================= */
+.connect-section{
+    margin-top: -80px;   /* moves section up */
+    padding-top: 0;
+    margin-right: 150px;
+    background: black;
+    text-align: center;
+    transition: background 0.3s, color 0.3s;
+}
+
+
+body.light-mode .connect-section{
+  background: #f9f9f9;
+}
+
+.connect-section h2{
+  font-size: 28px;
+  margin-bottom: 15px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin-top: -10px;
+}
+
+/* Icons container */
+.connect-icons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 45px;
+  flex-wrap: wrap;
+}
+
+/* Single icon */
+.connect-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  transition: 0.3s ease;
+}
+
+/* Icon circle */
+.connect-item i{
+  font-size: 28px;
+  background: #111;
+  padding: 20px;
+  border-radius: 50%;
+  transition: 0.3s ease;
+}
+
+/* Text label */
+.connect-item span{
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 0.3s ease;
+}
+
+/* Hover effects */
+.connect-item:hover i{
+  transform: scale(1.3);
+  box-shadow: 0 0 25px rgba(255,255,255,0.4);
+}
+
+.connect-item:hover span{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Light mode */
+body.light-mode .connect-item{
+  color: #111;
+}
+
+body.light-mode .connect-item i{
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+
+
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+
+<!-- LOADER -->
+<div id="loader">
+    <h1>LOADING PORTFOLIO</h1>
+    <div class="loader-row">
+        <div class="loader-icon" id="icon">🚀</div>
+        <div class="progress">
+            <div class="progress-bar" id="bar"></div>
+        </div>
+    </div>
+    <div class="loading-text" id="text">Launching creativity...</div>
+</div>
+
+<!-- CONTENT -->
+<div id="content">
+<section class="hero" id="hero">
+    <div class="hero-left">
+        <h1 class="intro">Hi! I’m</h1>
+        <h2 class="name">INDHU REDDY</h2>
+        <div class="line"></div>
+        <div class="subtitle" id="subtitle"></div> <!-- Empty initially -->
+        <p class="desc">
+            Developing practical web solutions with React and Django.  
+Exploring AI concepts and building real-world applications.
+        </p>
+        <div class="tags">
+            <span class="tag">Full Stack Developer</span>
+            <span class="tag">Python & Django</span>
+            <span class="tag">React Developer</span>
+            <span class="tag">AI Agent Basics</span>
+            <span class="tag">Tech Explorer</span>
+        </div>
+        <div class="info-cards">
+            <div class="card"><small>📍 Location</small><p>Tada, Tirupati, India</p></div>
+            <div class="card"><small>💼 Expertise</small><p>Full Stack Development</p></div>
+            <div class="card"><small>📧 Contact</small><p>chepakamindhureddy@gmail.com</p></div>
+        </div>
+    </div>
+    <div class="hero-right">
+        <div class="image-wrap">
+            <img src="{% static 'images/profile.jpeg' %}" alt="profile">
+        </div>
+    </div>
+</section>
+
+
+<!-- CONNECT SECTION -->
+<section class="connect-section">
+  <h2>Connect with me</h2>
+
+  <div class="connect-icons">
+    <a href="https://www.linkedin.com/in/chepakam-indhu-reddy-354b9b275/" target="_blank" class="connect-item">
+      <i class="fab fa-linkedin-in"></i>
+      <span>LinkedIn</span>
+    </a>
+
+    <a href="mailto:chepakamindhureddy@gmail.com" class="connect-item">
+      <i class="fas fa-envelope"></i>
+      <span>Email</span>
+    </a>
+
+    <a href="https://wa.me/916300155833" target="_blank" class="connect-item">
+      <i class="fab fa-whatsapp"></i>
+      <span>WhatsApp</span>
+    </a>
+
+    <a href="https://www.instagram.com/indhu_reddy003/" target="_blank" class="connect-item">
+      <i class="fab fa-instagram"></i>
+      <span>Instagram</span>
+    </a>
+
+    <a href="https://facebook.com/" target="_blank" class="connect-item">
+      <i class="fab fa-facebook-f"></i>
+      <span>Facebook</span>
+    </a>
+  </div>
+</section>
+<!--about-->
+
+
+
+
+    <!--
+    
+      <p>
+        I’m Indhu Reddy, a tech-driven learner passionate about building real-world solutions. 
+        I enjoy exploring AI, machine learning, and innovative software development. I’m eager 
+        to contribute my skills and grow in a challenging professional environment.
+      </p>
+      <p>
+        Beyond code, I enjoy exploring design, experimenting with motion and interaction, 
+        blending creativity with technical precision. My goal is to build solutions that 
+        not only perform — but also inspire.
+      </p>
+      <p>
+        4th-year B.Tech AI Engineering student with hands-on experience in ML & DL Projects. 
+        Proficient in Python, PyTorch, TensorFlow, and data preprocessing. Seeking internship 
+        opportunities to contribute to impactful AI solutions.
+      </p>
+  
+
+
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <button id="toggleBrightness" data-tooltip="Toggle Brightness">
+    <i class="fas fa-sun"></i>
+  </button>
+  <a href="https://github.com/Indhu-Reddy-chepakam" target="_blank" data-tooltip="GitHub">
+    <i class="fab fa-github"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/chepakam-indhu-reddy-354b9b275/" target="_blank" data-tooltip="LinkedIn">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+  <a href="https://twitter.com/yourusername" target="_blank" data-tooltip="Twitter">
+    <i class="fab fa-twitter"></i>
+  </a>
+  <a href="https://www.instagram.com/indhu_reddy003/" target="_blank" data-tooltip="Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="mailto:chepakamindhureddy@gmail.com" data-tooltip="Email">
+    <i class="fas fa-envelope"></i>
+  </a>
+</div>
+
+</div> <!-- END CONTENT -->
+
+<script>
+/* ================= LOADER =================*/
+let progress = 0;
+const bar = document.getElementById("bar");
+const icon = document.getElementById("icon");
+const text = document.getElementById("text");
+
+function animateText(message){
+    text.style.animation="none";
+    text.offsetHeight;
+    text.textContent = message;
+    text.style.animation="slideDown 0.6s forwards";
+}
+
+const loaderInterval = setInterval(()=>{
+    progress += 1;
+    bar.style.width = progress + "%";
+
+    if(progress === 30){
+        icon.textContent = "🎨";
+        animateText("Designing possibilities...");
+    }
+
+    if(progress === 65){
+        icon.textContent = "🌐";
+        animateText("Going globally...");
+    }
+
+    if(progress >= 100){
+        clearInterval(loaderInterval);
+        setTimeout(()=>{
+            document.getElementById("loader").style.display="none";
+            document.getElementById("content").style.display="block";
+            document.querySelector(".navbar").style.display="grid";
+
+            startHomeAnimations();   // start animations
+        },400);
+    }
+},30);
+
+
+
+
+/* ================= HOME ANIMATIONS ================= */
+function startHomeAnimations(){
+    const hi = document.querySelector('.intro');
+    const name = document.querySelector('.name');
+    const subtitle = document.getElementById("subtitle");
+    const fullSubtitle = "Aspiring Software Engineer | Full Stack Developer | Tech Explorer";
+    const desc = document.querySelector('.desc');
+    const tags = document.querySelector('.tags');
+    const cards = document.querySelector('.info-cards');
+    const profile = document.querySelector('.hero-right');
+
+    profile.classList.add('from-right');
+    setTimeout(()=> hi.classList.add('from-up'), 200);
+    setTimeout(()=> name.classList.add('from-up'), 400);
+    setTimeout(()=> typingEffect(subtitle, fullSubtitle), 700);
+    setTimeout(()=> desc.classList.add('from-down'), 1400);
+    setTimeout(()=> tags.classList.add('from-down'), 1600);
+    setTimeout(()=> cards.classList.add('from-down'), 1800);
+}
+
+/* ================= TYPING EFFECT ================= */
+function typingEffect(element, text){
+    element.textContent = "";
+    element.style.opacity = "1";
+    let i=0;
+    const interval = setInterval(()=>{
+        if(i<text.length){
+            element.textContent += text.charAt(i);
+            i++;
+        }else{
+            clearInterval(interval);
+        }
+    },40);
+}
+
+/* ================= SIDEBAR TOGGLE ================= */
+const toggleBtn = document.getElementById('toggleBrightness');
+const toggleIcon = toggleBtn.querySelector('i');
+
+toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    if(document.body.classList.contains('light-mode')){
+
+        toggleIcon.classList.remove('fa-sun');
+        toggleIcon.classList.add('fa-moon');
+    } else {
+        toggleIcon.classList.remove('fa-moon');
+        toggleIcon.classList.add('fa-sun');
+    }
+});
+
+
+
+
+</script>
+
+
+{% endblock %}

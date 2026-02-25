@@ -1,0 +1,259 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Projects | Indhu Reddy{% endblock %}
+
+{% block content %}
+
+<style>
+
+/* ================= PROJECT PAGE ================= */
+
+.navbar{
+    display:grid !important;
+}
+
+.projects-section{
+    min-height:100vh;
+   padding-top: 20px;
+padding-bottom: 20px;
+padding-left: 60px;
+padding-right: 60px;
+
+    background: radial-gradient(circle at top, #111, #000);
+}
+
+/* Title */
+.projects-title{
+    color:#00c3ff;
+    font-size:30px;
+    margin-bottom:7px;
+    animation: slideDown 0.8s ease-out forwards;
+}
+
+.projects-subtitle{
+    color:#aaa;
+    margin-bottom:60px;
+    font-size:18px;
+    animation: slideDown 1s ease-out forwards;
+}
+
+/* Grid */
+.projects-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
+    gap:40px;
+}
+
+/* Card */
+.project-card{
+    background: rgba(20,20,20,0.6);
+    backdrop-filter: blur(12px);
+    border-radius:18px;
+    padding:25px;
+    border:1px solid rgba(0,195,255,0.15);
+    transition:all 0.4s ease;
+
+    opacity:0;
+    transform:translateY(60px);
+    animation: slideUp 0.8s ease forwards;
+}
+
+.project-card:nth-child(1){ animation-delay:0.2s; }
+.project-card:nth-child(2){ animation-delay:0.4s; }
+.project-card:nth-child(3){ animation-delay:0.6s; }
+.project-card:nth-child(4){ animation-delay:0.8s; }
+.project-card:nth-child(5){ animation-delay:1s; }
+.project-card:nth-child(6){ animation-delay:1.2s; }
+
+/* Image */
+.project-card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border-radius:12px;
+    margin-bottom:20px;
+    transition:0.4s ease;
+}
+
+.project-card:hover img{
+    transform:scale(1.05);
+}
+
+.project-card h3{
+    color:#00c3ff;
+    margin-bottom:15px;
+    font-size:20px;
+}
+
+.project-card p{
+    color:#ccc;
+    font-size:15px;
+    margin-bottom:15px;
+    line-height:1.6;
+}
+
+/* Tech Tags */
+.tech-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.tech-tags span{
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+    background:rgba(0,195,255,0.1);
+    border:1px solid rgba(0,195,255,0.3);
+    color:#00c3ff;
+}
+
+/* Hover Effect */
+.project-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 0 40px rgba(0,195,255,0.35);
+    border:1px solid rgba(0,195,255,0.4);
+}
+
+/* Animations */
+@keyframes slideUp{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes slideDown{
+    from{
+        opacity:0;
+        transform:translateY(-30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .projects-section{
+        padding:60px 25px;
+    }
+
+    .projects-title{
+        font-size:30px;
+    }
+}
+
+</style>
+
+<section class="projects-section">
+
+    <h1 class="projects-title">🚀 Projects</h1>
+    <p class="projects-subtitle">
+        A collection of my academic and development projects.
+    </p>
+
+    <div class="projects-container">
+
+        <!-- School Management System -->
+        <div class="project-card">
+            <img src="{% static 'images/management.png' %}" alt="School Management System">
+            <h3>🎓 School Management System</h3>
+            <p>
+                Developed modules for student login, registration, and dashboard.
+                Built pages to manage students, classes, and academic records
+                with structured database integration.
+            </p>
+            <div class="tech-tags">
+                <span>Python</span>
+                <span>Django</span>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>SQL</span>
+            </div>
+        </div>
+
+        <!-- E-Commerce Website -->
+        <div class="project-card">
+            <img src="{% static 'images/ecommerence.png' %}" alt="E-Commerce Website">
+            <h3>🛒 E-Commerce Website (Groceries Platform)</h3>
+            <p>
+                Designed authentication system with login and registration.
+                Developed modules to manage groceries, categories, cart, and orders
+                with responsive UI.
+            </p>
+            <div class="tech-tags">
+                <span>Python</span>
+                <span>Django</span>
+                <span>Bootstrap</span>
+                <span>JavaScript</span>
+                <span>SQL</span>
+            </div>
+        </div>
+
+        <!-- Robotic Arm -->
+        <div class="project-card">
+            <img src="{% static 'images/hand.png' %}" alt="Robotic Arm">
+            <h3>🤖 Hand Gesture Controlled Robotic Arm</h3>
+            <p>
+                Implemented a remote sensing system to control a robotic arm
+                using hand gesture commands transmitted via server.
+            </p>
+            <div class="tech-tags">
+                <span>Embedded Systems</span>
+                <span>Remote Sensing</span>
+                <span>Electronics</span>
+            </div>
+        </div>
+
+        <!-- Night Lighting -->
+        <div class="project-card">
+            <img src="{% static 'images/automaticnight.png' %}" alt="Automatic Night Lighting">
+            <h3>💡 Automatic Night Lighting System</h3>
+            <p>
+                Designed an automatic lighting system using LDR sensor
+                to detect low light conditions and activate illumination.
+            </p>
+            <div class="tech-tags">
+                <span>LDR Sensor</span>
+                <span>Automation</span>
+                <span>Electronics</span>
+            </div>
+        </div>
+
+        <!-- Obstacle Robot -->
+        <div class="project-card">
+            <img src="{% static 'images/obstacle.png' %}" alt="Obstacle Monitoring Robot">
+            <h3>🚗 Obstacle Monitoring Robot</h3>
+            <p>
+                Developed a robot equipped with sensors to detect obstacles
+                and assist in collision prevention.
+            </p>
+            <div class="tech-tags">
+                <span>Robotics</span>
+                <span>Sensors</span>
+                <span>Embedded Systems</span>
+            </div>
+        </div>
+
+        <!-- Password Generator -->
+        <div class="project-card">
+            <img src="{% static 'images/password.png' %}" alt="Random Password Generator">
+            <h3>🔐 Random Password Generator</h3>
+            <p>
+                Built a secure password generator using mixed character sets
+                to create strong and random passwords.
+            </p>
+            <div class="tech-tags">
+                <span>Python</span>
+                <span>Security</span>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

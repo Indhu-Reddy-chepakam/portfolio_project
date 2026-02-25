@@ -1,0 +1,333 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<style>
+.navbar{
+    display:grid !important;
+}
+.resume-container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 30px;
+    color: #ffffff;
+}
+
+/* Header */
+
+.resume-header h1 {
+    font-size: 32px;
+    color: #00c3ff;
+    margin-bottom: 10px;
+}
+
+.resume-header p {
+    color: #aaa;
+    margin-bottom: 40px;
+}
+
+/* Card Style */
+
+.resume-card {
+    background: linear-gradient(145deg, #0a0f1c, #050914);
+    border-radius: 18px;
+    padding: 35px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(0, 170, 255, 0.3);
+    box-shadow: 0 0 25px rgba(0, 150, 255, 0.1);
+    transition: 0.4s ease;
+}
+
+.resume-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 35px rgba(0, 170, 255, 0.5);
+}
+
+/* Profile Section */
+
+.profile-card {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.profile-left {
+    flex: 1;
+}
+
+.profile-left h2 {
+    color: #00e0ff;
+    margin-bottom: 15px;
+}
+
+.profile-left p {
+    margin-bottom: 8px;
+    line-height: 1.7;
+}
+
+/* Summary Box */
+
+.profile-summary {
+    flex: 1;
+    background: rgba(0, 150, 255, 0.08);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 170, 255, 0.4);
+}
+
+.profile-summary h3 {
+    color: #00c3ff;
+    margin-bottom: 15px;
+}
+
+.profile-summary p {
+    line-height: 1.8;
+}
+
+/* Section Titles */
+
+.resume-card h2 {
+    color: #00c3ff;
+    margin-bottom: 25px;
+}
+
+.resume-card h4 {
+    margin-bottom: 8px;
+}
+
+/* Education Blocks */
+
+.edu-block {
+    margin-bottom: 30px;
+}
+
+.edu-block p {
+    margin-bottom: 6px;
+    line-height: 1.7;
+}
+
+/* Lists */
+
+.resume-card ul {
+    padding-left: 25px;
+    margin-top: 10px;
+}
+
+.resume-card ul li {
+    margin-bottom: 12px;
+    line-height: 1.7;
+    color: #cbd5e1;
+}
+
+/* Skill Tags */
+
+.skills-tags {
+    margin-top: 10px;
+}
+
+.skills-tags span {
+    display: inline-block;
+    background: rgba(0, 150, 255, 0.15);
+    color: #00e0ff;
+    padding: 8px 16px;
+    margin: 8px;
+    border-radius: 25px;
+    font-size: 14px;
+    border: 1px solid rgba(0, 170, 255, 0.4);
+    transition: 0.3s ease;
+}
+
+.skills-tags span:hover {
+    background: #00c3ff;
+    color: #000;
+    transform: scale(1.08);
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .profile-card {
+        flex-direction: column;
+    }
+}
+.download-btn {
+    display: inline-block;
+    background:black;
+    color: white;
+    padding: 14px 30px;
+    margin-top: -60px;
+    margin-left: 250px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s ease;
+    box-shadow: 0 8px 20px rgb(58, 55, 55);
+}
+
+.download-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0, 170, 255, 0.6);
+}
+/* ===== Entry Animation ===== */
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(80px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply animation to sections */
+
+.resume-header {
+    animation: slideUp 0.8s ease forwards;
+}
+
+.resume-card {
+    opacity: 0;
+    animation: slideUp 0.8s ease forwards;
+}
+
+/* Sequential delays */
+
+.resume-card:nth-of-type(1) { animation-delay: 0.2s; }
+.resume-card:nth-of-type(2) { animation-delay: 0.4s; }
+.resume-card:nth-of-type(3) { animation-delay: 0.6s; }
+.resume-card:nth-of-type(4) { animation-delay: 0.8s; }
+.resume-card:nth-of-type(5) { animation-delay: 1s; }
+.resume-card:nth-of-type(6) { animation-delay: 1.2s; }
+.resume-card:nth-of-type(7) { animation-delay: 1.4s; }
+
+/* Download button animation */
+
+.download-btn {
+    opacity: 0;
+    animation: slideUp 0.8s ease forwards 1.6s;
+}
+
+</style>
+<div class="resume-container">
+
+    <!-- Header -->
+    <div class="resume-header">
+        <h1>📄 Resume</h1>
+        <p>A quick overview of my academic and professional journey.</p>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="resume-card profile-card">
+        <div class="profile-left">
+            <h2>CHEPAKAM INDHU REDDY</h2>
+            <p>📧 chepakamindhureddy@gmail.com</p>
+            <p>📞 +91 6300155833</p>
+            <p>📍 Tada, Tirupati District, Andhra Pradesh</p>
+        </div>
+
+        <div class="profile-summary">
+            <h3>Career Objective</h3>
+            <p>
+                Motivated and adaptable graduate seeking an entry-level role
+                to apply skills in Python, web technologies, and problem-solving
+                while contributing to organizational success through dedication,
+                attention to detail, and continuous learning in a dynamic professional environment.
+            </p>
+        </div>
+    </div>
+
+    <!-- Education -->
+    <div class="resume-card">
+        <h2>🎓 Education</h2>
+
+        <div class="edu-block">
+            <h4>B.Tech in Electronics and Communication Engineering (ECE)</h4>
+            <p>Annamacharya Institute of Technology & Sciences, Tirupati</p>
+            <p>2022 – 2025 | CGPA: 8.90</p>
+        </div>
+
+        <div class="edu-block">
+            <h4>Diploma in ECE</h4>
+            <p>Gokula Krishna College of Engineering, Sullurpeta</p>
+            <p>2019 – 2022 | Percentage: 89.09%</p>
+        </div>
+
+        <div class="edu-block">
+            <h4>Secondary School Certificate (SSC)</h4>
+            <p>Champion EM High School, Sullurpeta</p>
+            <p>2019 | GPA: 9.5</p>
+        </div>
+    </div>
+
+    <!-- Technical Skills -->
+    <div class="resume-card">
+        <h2>⚙ Technical Skills</h2>
+
+        <div class="skills-tags">
+            <span>Python</span>
+            <span>Java (Basics)</span>
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>Bootstrap</span>
+            <span>JavaScript</span>
+            <span>React JS</span>
+            <span>Django</span>
+            <span>SQL</span>
+            <span>AI Agent Fundamentals</span>
+        </div>
+    </div>
+
+    <!-- Internship -->
+    <div class="resume-card">
+        <h2>💼 Internship</h2>
+
+        <h4>Python Full Stack Developer Intern</h4>
+        <p>Namatha IT Solutions, Hyderabad</p>
+
+        <ul>
+            <li>Worked with HTML, CSS, Bootstrap, JavaScript, React JS, Django</li>
+            <li>Built responsive UI components</li>
+            <li>Assisted in API integration</li>
+            <li>Gained knowledge in AI Agent Fundamentals</li>
+        </ul>
+    </div>
+
+    <!-- Certifications -->
+    <div class="resume-card">
+        <h2>📜 Certifications</h2>
+        <ul>
+            <li>6-Month Python Internship – Blackbuck Engineer</li>
+            <li>6-Week Java Programming Internship – EXCELR</li>
+        </ul>
+    </div>
+
+    <!-- Projects -->
+    <div class="resume-card">
+        <h2>💻 Projects</h2>
+        <ul>
+            <li>School Management System</li>
+            <li>E-Commerce Website (Groceries Platform)</li>
+            <li>Human Hand Gesture Controlled Robotic Arm</li>
+            <li>Automatic Night Lighting System</li>
+            <li>Obstacle Monitoring Robot</li>
+            <li>Random Password Generator</li>
+        </ul>
+    </div>
+
+
+</div>
+<div>
+<a href="{% static 'files/chepakam_indhu_reddy.pdf' %}" download class="download-btn">
+    ⬇ Download Resume
+</a>
+</div>
+{% endblock %}

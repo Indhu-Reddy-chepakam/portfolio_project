@@ -1,0 +1,317 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/skills.css' %}">
+<link rel="stylesheet"
+ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<style>
+.navbar{
+    display:grid !important;
+}
+    body {
+    margin: 0;
+    background: #020617;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+/* Section */
+.skills-section {
+    padding-top: 40px;
+padding-bottom: 60px;
+padding-left: 60px;
+padding-right: 60px;
+
+}
+
+/* Title */
+.skills-title {
+    color: #00e0ff;
+    font-size: 36px;
+    margin-bottom: 7px;
+    margin-top: -7px;
+}
+
+.skills-subtitle {
+    color: #94a3b8;
+    margin-bottom: 40px;
+}
+
+/* FULL WIDTH GLASS CONTAINER */
+.skills-box {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    height: 600px;
+    border-radius: 30px;
+    background: radial-gradient(circle at center, #062c3d, #000814);
+    box-shadow: 0 0 60px rgba(0, 150, 255, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+/* SKILL BUBBLE */
+.skill {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(0, 80, 160, 0.08);
+    border: 1px solid rgba(0, 170, 255, 0.5);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s ease;
+    animation: float 8s ease-in-out infinite;
+}
+
+/* Hover */
+.skill:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 40px rgba(0, 170, 255, 0.9);
+}
+
+/* ICONS */
+.skill i {
+    font-size: 38px;
+    margin-bottom: 6px;
+}
+
+/* TEXT */
+.skill span {
+    font-size: 13px;
+    color: #cbd5e1;
+}
+
+/* ===== SMOOTH MULTI-DIRECTION FLOATING ===== */
+@keyframes float {
+    0%   { transform: translate(0px, 0px); }
+    25%  { transform: translate(12px, -15px); }
+    50%  { transform: translate(-10px, -25px); }
+    75%  { transform: translate(8px, -10px); }
+    100% { transform: translate(0px, 0px); }
+}
+
+/* ===== DIFFERENT SPEEDS ===== */
+.s1 { animation-duration: 7s; }
+.s2 { animation-duration: 9s; }
+.s3 { animation-duration: 8s; }
+.s4 { animation-duration: 10s; }
+.s5 { animation-duration: 6.5s; }
+.s6 { animation-duration: 9.5s; }
+.s7 { animation-duration: 7.5s; }
+.s8 { animation-duration: 8.5s; }
+.s9 { animation-duration: 10s; }
+.s10 { animation-duration: 6s; }
+
+/* ===== POSITIONS (Aligned Layout) ===== */
+.s1 { top: 80px; left: 200px; }
+.s2 { top: 90px; left: 500px; }
+.s3 { top: 80px; right: 450px; }
+.s4 { top: 80px; right: 200px; }
+
+.s5 { top: 250px; left: 120px; }
+.s6 { top: 250px; left: 380px; }
+.s7 { top: 250px; right: 380px; }
+.s8 { top: 250px; right: 120px; }
+
+.s9 { top: 420px; left: 300px; }
+.s10 { top: 420px; right: 300px; }
+
+/* ===== BRAND COLORS (ICONS ONLY) ===== */
+.fa-python { color: #3776AB; }
+.fa-java { color: #f89820; }
+.fa-html5 { color: #E34F26; }
+.fa-css3-alt { color: #1572B6; }
+.fa-bootstrap { color: #7952B3; }
+.fa-js { color: #F7DF1E; }
+.fa-react { color: #61DBFB; }
+.fa-server { color: #44B78B; } 
+.fa-database { color: #4DB33D; }
+.fa-robot { color: #FF6F00; }
+/* ================= CATEGORY CARDS ================= */
+
+.skills-categories {
+    margin-top: 10px;
+    padding: 40px 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+}
+
+/* Card Style */
+.category-card {
+    background: linear-gradient(145deg, #031d33, #000814);
+    border-radius: 20px;
+    padding: 30px 25px;
+    border: 1px solid rgba(0, 170, 255, 0.3);
+    box-shadow: 0 0 30px rgba(0, 150, 255, 0.1);
+    transition: 0.4s ease;
+}
+
+/* Hover Effect */
+.category-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 40px rgba(0, 170, 255, 0.6);
+}
+
+/* Title */
+.category-card h3 {
+    margin-bottom: 20px;
+    color: #00e0ff;
+    font-size: 20px;
+}
+
+/* List */
+.category-card ul {
+    list-style: disc;
+    padding-left: 20px;
+    color: #cbd5e1;
+}
+
+.category-card ul li {
+    margin-bottom: 8px;
+}
+
+/* ===== Slide Up Animation ===== */
+
+.skills-page {
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.7s ease-out;
+}
+
+/* When active */
+.skills-page.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+
+</style>
+<section >
+    <div class="skills-page">
+    <div class="skills-section">
+    <h2 class="skills-title">My Skills</h2>
+    <p class="skills-subtitle">
+        ✨ Technical expertise blended with creativity — explore my core competencies below.
+    </p>
+
+    <div class="skills-box">
+
+        <div class="skill s1">
+            <i class="fab fa-python"></i>
+            <span>Python</span>
+        </div>
+
+        <div class="skill s2">
+            <i class="fab fa-java"></i>
+            <span>Java</span>
+        </div>
+
+        <div class="skill s3">
+            <i class="fab fa-html5"></i>
+            <span>HTML</span>
+        </div>
+
+        <div class="skill s4">
+            <i class="fab fa-css3-alt"></i>
+            <span>CSS</span>
+        </div>
+
+        <div class="skill s5">
+            <i class="fab fa-bootstrap"></i>
+            <span>Bootstrap</span>
+        </div>
+
+        <div class="skill s6">
+            <i class="fab fa-js"></i>
+            <span>JavaScript</span>
+        </div>
+
+        <div class="skill s7">
+            <i class="fab fa-react"></i>
+            <span>React JS</span>
+        </div>
+
+        <div class="skill s8">
+            <i class="fas fa-server"></i>
+            <span>Django</span>
+        </div>
+
+        <div class="skill s9">
+            <i class="fas fa-database"></i>
+            <span>SQL</span>
+        </div>
+
+        <div class="skill s10">
+            <i class="fas fa-robot"></i>
+            <span>AI Agent</span>
+        </div>
+
+    </div>
+    </div>
+
+    <div class="skills-categories" >
+
+    <div class="category-card">
+        <h3>Programming & Database</h3>
+        <ul>
+            <li>Python</li>
+            <li>Java (Basics)</li>
+            <li>SQL</li>
+        </ul>
+    </div>
+
+    <!-- Web Development -->
+    <div class="category-card">
+        <h3>Web Development</h3>
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>Bootstrap</li>
+            <li>JavaScript</li>
+            <li>React JS</li>
+            <li>Django</li>
+        </ul>
+    </div>
+
+    <!-- Tools + AI -->
+    <div class="category-card">
+        <h3>Tools & AI Automation</h3>
+        <ul>
+            <li>Git</li>
+            <li>VS Code</li>
+            <li>API Integration</li>
+            <li>AI Agent Fundamentals</li>
+        </ul>
+    </div>
+
+    <!-- Soft Skills -->
+    <div class="category-card">
+        <h3>Soft Skills</h3>
+        <ul>
+            <li>Teamwork</li>
+            <li>Problem Solving</li>
+            <li>Adaptability</li>
+            <li>Creativity</li>
+            <li>Communication</li>
+        </ul>
+    </div>
+
+</div>
+</div>
+</section>
+<script>
+    window.addEventListener("load", function () {
+        document.querySelector(".skills-page").classList.add("active");
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{% block title %}Indhu Reddy | Portfolio{% endblock %}</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:black;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* NAVBAR */
+.navbar{
+    width:100%;
+    height:70px;
+    padding: 0 40px;
+    display:grid;
+    grid-template-columns: auto 1fr auto;
+    align-items:center;
+    position: sticky;
+    top:0;
+    background: rgba(0, 0, 0, 0.35);
+    border-bottom: 0.02px solid grey;
+    backdrop-filter: blur(12px);
+    z-index:1000;
+
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: navbarFade 0.3s ease forwards;
+
+}
+
+@keyframes navbarFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* Left profile */
+.profile{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background: linear-gradient(135deg,#5f6cff,#7f9cff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    color:white;
+}
+
+.profile-text h3{ font-size:15px; }
+.profile-text p{ font-size:12px; color:#4fa3ff; }
+
+/* Menu */
+.menu{
+    list-style:none;
+    display:flex;
+    justify-content:center;
+    gap:45px;
+}
+
+.menu li a{
+    text-decoration:none;
+    color:#ddd;
+    font-size:16px;
+    position:relative;
+}
+
+.menu li a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0%;
+    height:2px;
+    background:#5f9cff;
+    transition:0.3s;
+}
+.menu li a:hover::after{ width:100%; }
+
+.spacer{ width:40px; }
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" style="display:none;">
+
+    <div class="profile">
+        <div class="avatar">IR</div>
+        <div class="profile-text">
+            <h3>Chepakam Indhu Reddy</h3>
+            <p>Python Full Stack Developer</p>
+        </div>
+    </div>
+
+   <ul class="menu">
+    <li><a href="{% url 'home' %}">Home</a></li>     
+    <li><a href="{% url 'about' %}">About</a></li>  
+        <li><a href="{% url 'projects' %}">Projects</a></li>
+        <li><a href="{% url 'skills' %}">Skills</a></li>
+        <li><a href="{% url 'resume' %}">Resume</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+
+    <div class="spacer"></div>
+</nav>
+
+<!-- PAGE CONTENT -->
+{% block content %}{% endblock %}
+
+</body>
+</html>
