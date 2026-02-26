@@ -5,8 +5,7 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html')
-def welcome(request):
-    return render(request, 'welcome.html')
+
 
 def projects(request):
     return render(request, 'project.html')
