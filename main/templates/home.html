@@ -7,8 +7,107 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'style.css' %}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+    /* ================= MOBILE RESPONSIVE ================= */
+
+@media (max-width: 768px){
+
+    body{
+        overflow-x: hidden;
+    }
+
+    .hero{
+        grid-template-columns: 1fr;
+        padding: 100px 20px;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .hero-left{
+        align-items: center;
+    }
+
+    .intro{
+        font-size: 28px;
+    }
+
+    .name{
+        font-size: 40px;
+    }
+
+    .subtitle{
+        font-size: 14px;
+    }
+
+    .desc{
+        font-size: 14px;
+        max-width: 100%;
+    }
+
+    .tags{
+        justify-content: center;
+    }
+
+    .tag{
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .info-cards{
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .card{
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+
+    .hero-right{
+        margin-right: 0;
+    }
+
+    .image-wrap img{
+        width: 180px;
+    }
+
+    .connect-section{
+        margin-top: 0;
+        margin-right: 0;
+        padding: 40px 20px;
+    }
+
+    .connect-icons{
+        gap: 25px;
+    }
+
+    .sidebar{
+        right: 10px;
+        gap: 10px;
+    }
+
+    .sidebar button,
+    .sidebar a{
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    /* Loader responsive */
+    .progress{
+        width: 250px;
+    }
+
+    #loader h1{
+        font-size: 28px;
+        text-align: center;
+    }
+}
+
+
 *{
     margin:0;
     padding:0;
